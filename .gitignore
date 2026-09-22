@@ -1,0 +1,32 @@
+# Python environment & cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# IDE & OS files
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Model checkpoints & large dataset files (except exported light weights)
+data/raw/*
+!data/raw/.gitkeep
+models/checkpoints/*
+!models/checkpoints/.gitkeep
+*.onnx
+*.h5
+
+# Testing & Coverage
+.coverage
+htmlcov/
+.pytest_cache/

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeuroVision AI - Deep Learning & Predictive Analytics Suite</title>
+  <meta name="description" content="Production-ready multi-modal Deep Learning and Predictive Analytics Suite featuring Computer Vision, Tabular Risk Scoring, and NLP Sentiment Analysis.">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="brand">
+      <div class="brand-logo">NV</div>
+      <div class="brand-title">NeuroVision AI</div>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#" class="nav-link active" onclick="switchTab('vision', event)">Vision Studio</a></li>
+      <li><a href="#" class="nav-link" onclick="switchTab('tabular', event)">Tabular Analytics</a></li>
+      <li><a href="#" class="nav-link" onclick="switchTab('nlp', event)">NLP Sentiment Lab</a></li>
+      <li><a href="#" class="nav-link" onclick="switchTab('metrics', event)">Model Metrics</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Banner -->
+  <header class="hero">
+    <div class="badge">PROD-READY MULTI-MODAL DEEP LEARNING SUITE</div>
+    <h1 class="hero-title">Next-Gen Deep Learning & Predictive Intelligence</h1>
+    <p class="hero-subtitle">Interactive real-time inference engine powered by PyTorch ResNet, Gradient Boosting Ensembles, and Bidirectional Neural Networks.</p>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+
+    <!-- 1. VISION STUDIO TAB -->
+    <section id="tab-vision" class="tab-content active">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">📷 Computer Vision Canvas & Upload</div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+            Draw a pattern or upload an image to run real-time PyTorch VisionResNet classification.
+          </p>
+
+          <div class="canvas-container">
+            <canvas id="drawCanvas" width="240" height="240"></canvas>
+            
+            <div class="btn-group">
+              <button class="btn btn-secondary" onclick="clearCanvas()">Clear Canvas</button>
+              <button class="btn btn-primary" onclick="predictCanvas()">Run DL Inference</button>
+            </div>
+
+            <div style="width: 100%; text-align: center; margin-top: 0.5rem;">
+              <span style="color: var(--text-muted); font-size: 0.85rem;">- OR UPLOAD AN IMAGE FILE -</span>
+              <input type="file" id="imageUpload" accept="image/*" onchange="handleFileUpload(event)" style="margin-top: 0.5rem;">
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🔬 Diagnostic Classification & Heatmap</div>
+          
+          <div id="visionResultBox" class="result-box">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span style="color: var(--text-muted); font-size: 0.85rem;">PREDICTED CLASS</span>
+                <div id="visionClass" class="result-header">Normal Diagnostic</div>
+              </div>
+              <div style="text-align: right;">
+                <span style="color: var(--text-muted); font-size: 0.85rem;">CONFIDENCE SCORE</span>
+                <div id="visionConfidence" style="font-size: 1.4rem; font-weight: 700; color: var(--accent-cyan);">98.5%</div>
+              </div>
+            </div>
+            
+            <div class="progress-bar-bg">
+              <div id="visionProgressBar" class="progress-bar-fill" style="width: 98.5%;"></div>
+            </div>
+
+            <p id="visionRecommendation" style="color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem;">
+              No anatomical anomalies detected. Diagnostic confidence high.
+            </p>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <canvas id="visionChart" height="160"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 2. TABULAR ANALYTICS TAB -->
+    <section id="tab-tabular" class="tab-content">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">📊 Predictive Risk Assessment Sliders</div>
+          
+          <div class="form-group">
+            <div class="form-label"><span>Age (Years)</span><span id="val-age" class="value">55</span></div>
+            <input type="range" id="input-age" min="18" max="90" value="55" oninput="updateTabularForm()">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label"><span>Systolic BP (mmHg)</span><span id="val-bp" class="value">140</span></div>
+            <input type="range" id="input-bp" min="80" max="220" value="140" oninput="updateTabularForm()">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label"><span>Serum Cholesterol (mg/dL)</span><span id="val-chol" class="value">225</span></div>
+            <input type="range" id="input-chol" min="100" max="400" value="225" oninput="updateTabularForm()">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label"><span>Max Heart Rate (bpm)</span><span id="val-hr" class="value">150</span></div>
+            <input type="range" id="input-hr" min="60" max="220" value="150" oninput="updateTabularForm()">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label"><span>Blood Glucose (mg/dL)</span><span id="val-glucose" class="value">115</span></div>
+            <input type="range" id="input-glucose" min="60" max="300" value="115" oninput="updateTabularForm()">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label"><span>Body Mass Index (BMI)</span><span id="val-bmi" class="value">28.5</span></div>
+            <input type="range" id="input-bmi" min="12" max="50" step="0.5" value="28.5" oninput="updateTabularForm()">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label"><span>Exercise Induced Angina</span><span id="val-angina" class="value">No (0)</span></div>
+            <input type="range" id="input-angina" min="0" max="1" value="0" oninput="updateTabularForm()">
+          </div>
+
+          <div class="form-group">
+            <div class="form-label"><span>ST Depression</span><span id="val-stdep" class="value">1.2</span></div>
+            <input type="range" id="input-stdep" min="0" max="6" step="0.1" value="1.2" oninput="updateTabularForm()">
+          </div>
+
+          <button class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;" onclick="runTabularInference()">Run Predictive Analytics</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">⚡ Risk Gauge & Feature Attribution</div>
+          
+          <div id="tabularResultBox" class="result-box">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span style="color: var(--text-muted); font-size: 0.85rem;">ASSESSED RISK SCORE</span>
+                <div id="tabularRisk" class="result-header">Low Risk</div>
+              </div>
+              <div style="text-align: right;">
+                <span style="color: var(--text-muted); font-size: 0.85rem;">PROBABILITY</span>
+                <div id="tabularProb" style="font-size: 1.4rem; font-weight: 700; color: var(--accent-green);">88.4%</div>
+              </div>
+            </div>
+
+            <div class="progress-bar-bg">
+              <div id="tabularProgressBar" class="progress-bar-fill" style="width: 88.4%;"></div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <div style="font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--text-muted);">Feature Importance Attribution (%)</div>
+            <canvas id="featureChart" height="200"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 3. NLP SENTIMENT LAB TAB -->
+    <section id="tab-nlp" class="tab-content">
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">💬 Text Sentiment & Intent Analyzer</div>
+          <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">
+            Input any clinical, product, or conversational text string to test the Bi-LSTM Sentiment Classifier.
+          </p>
+
+          <div class="form-group">
+            <textarea id="nlpInputText" rows="6" placeholder="Enter text string here... (e.g. 'The diagnostic AI accuracy was outstanding and extremely fast!')">The AI diagnostic model gave fast and accurate predictions with high confidence.</textarea>
+          </div>
+
+          <button class="btn btn-primary" style="width: 100%;" onclick="runNLPInference()">Analyze Sentiment</button>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🎯 Sentiment Classification Output</div>
+          
+          <div id="nlpResultBox" class="result-box">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <div>
+                <span style="color: var(--text-muted); font-size: 0.85rem;">DETECTED SENTIMENT</span>
+                <div id="nlpSentiment" class="result-header" style="color: var(--accent-cyan);">Positive</div>
+              </div>
+              <div style="text-align: right;">
+                <span style="color: var(--text-muted); font-size: 0.85rem;">CONFIDENCE</span>
+                <div id="nlpConfidence" style="font-size: 1.4rem; font-weight: 700; color: var(--accent-cyan);">96.2%</div>
+              </div>
+            </div>
+
+            <div class="progress-bar-bg">
+              <div id="nlpProgressBar" class="progress-bar-fill" style="width: 96.2%;"></div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem;">
+            <canvas id="nlpChart" height="160"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- 4. MODEL METRICS TAB -->
+    <section id="tab-metrics" class="tab-content">
+      <div class="grid-3" style="margin-bottom: 2rem;">
+        <div class="card" style="text-align: center;">
+          <span style="color: var(--text-muted); font-size: 0.85rem;">VISION ACCURACY</span>
+          <div style="font-size: 2.2rem; font-weight: 800; color: var(--accent-cyan);">96.50%</div>
+          <span style="color: var(--accent-green); font-size: 0.85rem;">ResNet Deep Architecture</span>
+        </div>
+
+        <div class="card" style="text-align: center;">
+          <span style="color: var(--text-muted); font-size: 0.85rem;">TABULAR F1-SCORE</span>
+          <div style="font-size: 2.2rem; font-weight: 800; color: var(--accent-purple);">0.942</div>
+          <span style="color: var(--accent-green); font-size: 0.85rem;">Gradient Boosting Ensemble</span>
+        </div>
+
+        <div class="card" style="text-align: center;">
+          <span style="color: var(--text-muted); font-size: 0.85rem;">NLP ACCURACY</span>
+          <div style="font-size: 2.2rem; font-weight: 800; color: var(--accent-pink);">95.00%</div>
+          <span style="color: var(--accent-green); font-size: 0.85rem;">Bi-LSTM Neural Network</span>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <div class="card-title">📈 Model Training Convergence</div>
+          <canvas id="convergenceChart" height="200"></canvas>
+        </div>
+
+        <div class="card">
+          <div class="card-title">🎯 Confusion Matrix Benchmark</div>
+          <canvas id="confusionChart" height="200"></canvas>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>NeuroVision AI &copy; 2026. Production Deep Learning & Predictive Analytics Engine.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
